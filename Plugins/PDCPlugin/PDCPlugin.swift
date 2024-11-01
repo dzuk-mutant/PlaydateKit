@@ -45,7 +45,6 @@ struct ModuleBuildRequest {
         let tools = Tools(context: context, verbose: verbose)
         let playdateSDK = try tools.playdateSDK()
 
-        let playdateSDK = try playdateSDK()
         let playdateSDKVersion = (try? String(
             contentsOf: URL(filePath: playdateSDK).appending(path: "VERSION.txt"),
             encoding: .utf8
@@ -178,7 +177,7 @@ struct ModuleBuildRequest {
         }
 
         @Sendable func buildDeviceModule(_ module: ModuleBuildRequest) async throws {
-            try await Task {
+            try Task {
                 print("building \(module.moduleName(for: .device))")
                 switch module.type {
                 case .playdateKit:
@@ -208,7 +207,7 @@ struct ModuleBuildRequest {
 
         @Sendable func buildSimulatorModule(_ module: ModuleBuildRequest) async throws {
             print("building \(module.moduleName(for: .simulator))")
-            try await Task {
+            Task {
                 switch module.type {
                 case .playdateKit:
                     try tools.swiftc(swiftFlags + swiftFlagsSimulator + module.sourcefiles + [
