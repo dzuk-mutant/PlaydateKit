@@ -4,7 +4,7 @@ import Foundation
 import PackageDescription
 
 let gccIncludePrefix =
-    "/usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1"
+    "/usr/include/newlib/c++/9.2.1/"
 
 let playdateSDKPath: String = if let path = Context.environment["PLAYDATE_SDK_PATH"] {
     path
