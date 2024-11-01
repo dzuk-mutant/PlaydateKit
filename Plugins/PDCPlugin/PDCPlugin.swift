@@ -177,8 +177,8 @@ struct ModuleBuildRequest {
         }
 
         @Sendable func buildDeviceModule(_ module: ModuleBuildRequest) async throws {
-            try Task {
-                print("building \(module.moduleName(for: .device))")
+            print("building \(module.moduleName(for: .device))")
+            try await Task {
                 switch module.type {
                 case .playdateKit:
                     // playdatekit_device.swiftmodule
@@ -207,7 +207,7 @@ struct ModuleBuildRequest {
 
         @Sendable func buildSimulatorModule(_ module: ModuleBuildRequest) async throws {
             print("building \(module.moduleName(for: .simulator))")
-            Task {
+            try await Task {
                 switch module.type {
                 case .playdateKit:
                     try tools.swiftc(swiftFlags + swiftFlagsSimulator + module.sourcefiles + [
